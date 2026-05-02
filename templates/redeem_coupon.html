@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Coupon inwisselen{% endblock %}
+{% block content %}
+
+<div class="coupon-wrapper">
+    <h1>🎟️ ACTIVEER<br><span>JE ACCOUNT</span></h1>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="flash {{ category }}">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    {% if sub %}
+    <div class="sub-status-box status-{{ sub.status }}">
+        {% if sub.status == 'active' %}
+            ✅ Account actief — verloopt op {{ sub.expires_at.strftime('%d-%m-%Y') }}
+        {% elif sub.status == 'expiring_soon' %}
+            🔔 Abonnement verloopt bijna op {{ sub.expires_at.strftime('%d-%m-%Y') }}
+        {% elif sub.status == 'expired' %}
+            ⚠️ Abonnement verlopen — je bedrijf is niet meer zichtbaar
+        {% elif sub.status == 'deactivated' %}
+            🚫 Account gedeactiveerd
+        {% endif %}
+    </div>
+    {% endif %}
+
+    <form method="POST" class="coupon-form">
+        <label>Voer je couponcode in</label>
+        <input type="text" name="coupon_code" placeholder="Bijv. BIZZLY-2026-XXXX" required>
+        <button type="submit" class="coupon-btn">Inwisselen</button>
+    </form>
+
+    <p><a href="{{ url_for('dashboard') }}">← Terug naar dashboard</a></p>
+</div>
+
+{% endblock %}

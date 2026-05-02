@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block content %}
+<div class="product-page">
+
+    <div class="product-image">
+        <div class="image-wrapper">
+            <img src="{{ url_for('static', filename=product.image) }}" alt="{{ product.name }}">
+        </div>
+    </div>
+
+    <div class="product-info">
+        <h1 class="product-title">{{ product.name }}</h1>
+
+        <h2 class="product-heading">Product description</h2>
+
+        <p class="product-description">
+            {{ product.description }}
+        </p>
+
+        {% if product.subtitle %}
+        <div class="product-sub">
+            {{ product.subtitle }}
+        </div>
+        {% endif %}
+
+        {% if session.get('role') == 'customer' %}
+        <form method="POST" action="{{ url_for('add_wishlist', product_id=product.id) }}">
+            <button type="submit" class="wishlist-btn">
+                ♡ Add to wishlist
+            </button>
+        </form>
+        {% endif %}
+    </div>
+
+</div>
+{% endblock %}
+

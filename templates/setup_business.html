@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Set up your business{% endblock %}
+
+{% block content %}
+<div class="setup-wrapper">
+
+    <!-- HERO IMAGE -->
+    <div class="setup-hero">
+        <img src="{{ url_for('static', filename='images/setup_hero.jpg') }}" alt="Set up business">
+    </div>
+
+    <!-- CONTENT -->
+    <div class="setup-content">
+        <h1>
+            {% if business.description %}
+            EDIT<br><span>YOUR BUSINESS</span>
+            {% else %}
+            SET UP<br><span>YOUR BUSINESS</span>
+            {% endif %}
+        </h1>
+
+
+        <form method="POST" enctype="multipart/form-data" class="setup-form">
+
+            <label>Bedrijfsbeschrijving</label>
+            <textarea name="description" placeholder="Beschrijf kort je bedrijf..." required></textarea>
+
+            <label>Adres</label>
+            <input type="text" name="address" placeholder="Bijv. Keizerstraat 120, Paramaribo" required>
+
+            <label class="upload-label">
+                Upload bedrijfslogo hier
+                <input type="file" name="logo" hidden>
+            </label>
+
+            <button type="submit" class="setup-btn">
+                Opslaan en doorgaan
+            </button>
+
+        </form>
+    </div>
+
+</div>
+{% endblock %}

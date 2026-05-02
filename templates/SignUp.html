@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aanmelden - Ondernemers</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="flash-messages">
+      {% for category, message in messages %}
+        <div class="flash {{ category }}">{{ message }}</div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+    <div class="signup-container">
+        <h1>Ben jij een ondernemer?</h1>
+        <p>Maak gerust een account en laat de wereld zien wat je te bieden hebt.</p>
+
+        <form action="/signup" method="POST" class="signup-form">
+            <label for="name">Naam</label>
+            <input type="text" id="name" name="name" placeholder="Je naam" required>
+
+            <label for="business_name">Bedrijfsnaam</label>
+            <input type="text" id="business_name" name="business_name" placeholder="Naam van je bedrijf" required>
+
+            <label for="category">Categorie</label>
+            <select id="category" name="category" required>
+                <option value="restaurant">Restaurant</option>
+                <option value="bakery">Bakery</option>
+                <option value="winkel">Winkel</option>
+                <option value="kapper">Kapper</option>
+                <option value="beauty">Beauty</option>
+                <option value="cleaning">Cleaning</option>
+                <option value="car_services">Car Services</option>
+                <option value="electronics">Electronics</option>
+                <option value="fashion">Fashion</option>
+                <option value="food_drinks">Food & Drinks</option>
+                <option value="dienstverlening">Dienstverlening</option>
+                <option value="anders">Anders</option>
+
+            </select>
+
+            <label for="email">Gmail</label>
+            <input type="email" id="email" name="email" placeholder="bijv. jouwbedrijf@gmail.com" required>
+
+            <label for="password">Wachtwoord</label>
+            <input type="password" id="password" name="password" placeholder="Kies een sterk wachtwoord" required>
+
+            <button type="submit" class="btn">Aanmelden</button>
+        </form>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <title>Mijn Wishlist - Bizzly</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+
+        .wishlist-container {
+            max-width: 800px;
+            margin: 100px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .wishlist-item {
+            display: flex;
+            gap: 18px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .wishlist-item img {
+            width: 120px;
+            height: 120px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+
+        .wishlist-info h3 {
+            margin: 0;
+            font-size: 20px;
+        }
+
+        .wishlist-info p {
+            margin: 5px 0;
+            color: #444;
+        }
+
+        .remove-btn {
+            background: #ff3b3b;
+            color: white;
+            padding: 8px 14px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            height: 40px;
+            align-self: center;
+        }
+
+        .remove-btn:hover {
+            background: #d62828;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="wishlist-container">
+    <h1>Mijn Wishlist</h1>
+    <p>Dit zijn de producten die je hebt opgeslagen.</p>
+
+    {% for item in wishlist_items %}
+    <div class="wishlist-item">
+        <img src="{{ url_for('static', filename=item.product.image) }}" alt="{{ item.product.name }}">
+
+        <div class="wishlist-info">
+            <h3>{{ item.product.name }}</h3>
+            <p>{{ item.product.description }}</p>
+        </div>
+
+        <form method="POST" action="{{ url_for('remove_wishlist', item_id=item.id) }}">
+            <button type="submit" class="remove-btn">Verwijderen</button>
+        </form>
+    </div>
+
+    {% else %}
+    <p>Je wishlist is nog leeg.</p>
+    {% endfor %}
+</div>
+
+</body>
+</html>

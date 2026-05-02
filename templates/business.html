@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% block title %}{{ business.name }} - Bizzly{% endblock %}
+{% block content %}
+
+<body>
+
+<div class="business-page">
+    <div class="map-section">
+        <!-- Google Maps -->
+        <iframe
+                src="https://www.google.com/maps?q={{ business.address | urlencode }}&output=embed"
+                width="100%"
+                height="100%"
+                style="border:0;"
+                allowfullscreen=""
+                loading="lazy">
+
+        </iframe>
+    </div>
+
+    <div class="info-section">
+        <h1>{{ business.name }}</h1>
+
+        <!-- === Mooie Bedrijfsbeschrijving === -->
+        <div class="business-description-box">
+            <h2 class="section-title">Over ons</h2>
+            <p class="business-description">
+                {{ business.description }}
+            </p>
+        </div>
+
+        {% if business.address %}
+        <div class="address-box">
+            <p><span class="icon">📍</span> {{ business.address }}</p>
+        </div>
+        {% endif %}
+
+        <h2>Producten</h2>
+<div class="product-gallery">
+    {% for p in business.products %}
+    <div class="product-card">
+        <a href="{{ url_for('product_detail', product_id=p.id) }}">
+            <img src="{{ url_for('static', filename=p.image) }}" alt="{{ p.name }}">
+            <h4>{{ p.name }}</h4>
+        </a>
+
+    </div>
+    {% endfor %}
+</div>
+
+<!-- REVIEW SECTIE -->
+<div class="review-section">
+    <h2>Reviews</h2>
+
+    {% if session.get('role') == 'customer' %}
+    <form method="POST" action="{{ url_for('add_review', business_id=business.id) }}" class="review-form">
+
+        <label class="review-label">Beoordeling</label>
+        <div class="star-rating">
+            <input type="radio" name="rating" value="5" id="s5" required>
+            <label for="s5" title="5 sterren">★</label>
+            <input type="radio" name="rating" value="4" id="s4">
+            <label for="s4" title="4 sterren">★</label>
+            <input type="radio" name="rating" value="3" id="s3">
+            <label for="s3" title="3 sterren">★</label>
+            <input type="radio" name="rating" value="2" id="s2">
+            <label for="s2" title="2 sterren">★</label>
+            <input type="radio" name="rating" value="1" id="s1">
+            <label for="s1" title="1 ster">★</label>
+        </div>
+
+        <label class="review-label">Jouw review</label>
+        <textarea name="comment" class="review-textarea" placeholder="Schrijf hier je review..." required></textarea>
+
+        <button type="submit" class="review-btn">Plaatsen ★</button>
+    </form>
+
+    {% if business.facebook_url %}
+    <a href="{{ business.facebook_url }}"
+       target="_blank" rel="noopener">
+        <img src="/static/images/facebook-icon.png"
+         alt="Facebook" width="32">
+    </a>
+    {% endif %}
+
+    {% else %}
+    <p class="review-login-msg"><a href="{{ url_for('login') }}">Log in als klant</a> om een review te plaatsen.</p>
+    {% endif %}
+</div>
+
+    </div>
+</div>
+
+</body>
+
+{% endblock %}
+
+

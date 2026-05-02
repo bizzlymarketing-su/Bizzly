@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard – Bizzly</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+</head>
+<body>
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="flash-messages">
+      {% for category, message in messages %}
+        <div class="flash {{ category }}">{{ message }}</div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+<div class="dashboard-container">
+
+    <!-- Sidebar -->
+        <!-- Sidebar -->
+    <aside class="sidebar">
+        <a href="{{ url_for('home') }}" class="logo">Home</a>
+
+        <a href="{{ url_for('dashboard') }}" class="side-link active">📊 Dashboard</a>
+        <a href="{{ url_for('add_products', business_id=business.id) }}" class="side-link">➕ Product toevoegen</a>
+
+        <!-- NOTIFICATIES -->
+        <div class="side-section-title">
+            Notificaties
+            <span class="notification-badge">{{ notifications|length }}</span>
+        </div>
+
+        <div class="notifications-list">
+            {% for notif in notifications %}
+            <div class="notification-row {% if notif.is_read %}read{% endif %}">
+                <div class="notif-icon">
+                    {% if notif.type == 'review' %}⭐{% elif notif.type == 'wishlist' %}❤️{% else %}👁️{% endif %}
+                </div>
+                <div class="notif-content">
+                    <strong>{{ notif.title }}</strong><br>
+                    <span class="notif-desc">{{ notif.message }}</span>
+                    <span class="notif-time">{{ notif.timestamp.strftime('%H:%M') }} geleden</span>
+                </div>
+                {% if not notif.is_read %}
+                <form method="POST" action="{{ url_for('mark_notification_read', notif_id=notif.id) }}">
+                    <button type="submit" class="mark-read-btn" title="Markeer als gelezen">✓</button>
+                </form>
+                {% endif %}
+            </div>
+            {% else %}
+            <p class="no-notifications">Geen nieuwe notificaties</p>
+            {% endfor %}
+        </div>
+
+        <div class="side-section-title">BEDRIJF</div>
+        <a href="{{ url_for('setup_business') }}" class="side-link">Bedrijf bewerken</a>
+
+        <div class="side-section-title">ACCOUNT</div>
+        <a href="{{ url_for('logout') }}" class="side-link logout">🚪 Uitloggen</a>
+        <label>Facebook pagina (optioneel)</label>
+        <input type="url" name="facebook_url"
+               placeholder="https://facebook.com/jouwbedrijf"
+               value="{{ business.facebook_url or '' }}">
+    </aside>
+
+
+    <!-- Main Content -->
+    <main class="main">
+
+        {% if sub and sub.status == 'expired' %}
+        <div class="sub-warning-banner">
+            ⚠️ Je abonnement is verlopen. Je bedrijf is niet meer zichtbaar voor klanten.
+            <a href="{{ url_for('redeem_coupon') }}">Verlengen →</a>
+        </div>
+        {% elif sub and sub.status == 'expiring_soon' %}
+        <div class="sub-reminder-banner">
+            🔔 Je abonnement verloopt binnenkort. <a href="{{ url_for('redeem_coupon') }}">Nu verlengen →</a>
+        </div>
+        {% endif %}
+
+        <!-- Header -->
+        <div class="header">
+            <h1>Welkom terug, {{ user.name }} 👋</h1>
+            <p class="subtitle">{{ business.name }} – Ondernemerspaneel</p>
+        </div>
+
+        <!-- Stats Row -->
+        <section class="stats-row">
+
+            <div class="stat-card">
+                <h3>Totale Kliks</h3>
+                <p class="stat-number">{{ business.clicks }}</p>
+                <span class="stat-label">Aantal bezoekers op jouw bedrijf</span>
+            </div>
+            <div class="stat-card">
+                <h3>Gemiddelde Rating</h3>
+                <div class="stars" style="font-size: 24px; color: gold;">
+                    ★★★★☆
+                </div>
+                <p style="margin-top: 5px; font-size: 14px;">4.0 / 5.0 (12 reviews)</p>
+            </div>
+
+
+            <div class="stat-card">
+                <h3>Producten</h3>
+                <p class="stat-number">{{ products|length }}</p>
+                <span class="stat-label">Aantal producten toegevoegd</span>
+            </div>
+
+            <div class="stat-card">
+                <h3>Reviews</h3>
+                <p class="stat-number">4.8★</p>
+                <span class="stat-label">Decoratie</span>
+            </div>
+
+        </section>
+
+
+        <!-- Product List -->
+        <section>
+            <h2 class="section-title">Jouw producten</h2>
+
+            <div class="product-grid">
+
+                {% for product in products %}
+                <div class="product-card">
+                    <img src="{{ url_for('static', filename=product.image) }}" class="product-img">
+
+                    <h3>{{ product.name }}</h3>
+                    <p class="product-desc">{{ product.description }}</p>
+
+                    <div class="product-actions">
+                        <a href="#" class="btn-small edit-btn">Bewerken</a>
+                        <a href="#" class="btn-small delete-btn">Verwijderen</a>
+                    </div>
+                </div>
+                {% endfor %}
+
+                <a href="{{ url_for('add_products', business_id=business.id) }}" class="product-card add-card">
+                    ➕ Nieuw product
+                </a>
+
+            </div>
+            <h2 class="section-title">Recente Reviews</h2>
+            <div class="reviews-container">
+                {% for review in reviews %}
+                <div class="review-card">
+                    <h4>Klant #{{ review.customer_id }}</h4>
+                    <div class="stars" style="color: gold;">
+                        {% for i in range(review.rating) %}★{% endfor %}
+                        {% for i in range(5 - review.rating) %}☆{% endfor %}
+                    </div>
+                    <p>{{ review.comment }}</p>
+                </div>
+                {% else %}
+                <p>Nog geen reviews ontvangen.</p>
+                {% endfor %}
+            </div>
+
+
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+</html>
+
+

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Add product{% endblock %}
+
+{% block content %}
+<div class="add-product-wrapper">
+
+    <!-- HERO IMAGE -->
+    <div class="add-product-hero">
+        <img src="{{ url_for('static', filename='images/add_product_hero.jpg') }}" alt="Add product">
+    </div>
+
+    <!-- CONTENT -->
+    <div class="add-product-content">
+        <h1>ADD<br><span>YOUR PRODUCT</span></h1>
+
+        <form method="POST" enctype="multipart/form-data" class="add-product-form">
+
+            <label>Productnaam</label>
+            <input type="text" name="name" placeholder="Naam van jouw product..." required>
+
+            <label>Productbeschrijving</label>
+            <textarea name="description" placeholder="Beschrijf kort je product..." required></textarea>
+
+            <label class="upload-label">
+                Upload product foto hier
+                <input type="file" name="image" hidden>
+            </label>
+
+            <button type="submit" class="add-product-btn">
+                Toevoegen
+            </button>
+
+        </form>
+    </div>
+
+</div>
+{% endblock %}
+

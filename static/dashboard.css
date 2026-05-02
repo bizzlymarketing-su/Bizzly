@@ -1,0 +1,353 @@
+/* ======== GLOBAL ======== */
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #7fff00;
+    color: #1c1c1e;
+}
+
+h1, h2, h3 {
+    margin: 0;
+    font-weight: 600;
+}
+
+a {
+    text-decoration: none;
+}
+
+
+
+/* ======== LAYOUT ======== */
+
+.dashboard-container {
+    display: flex;
+    height: 100vh;
+}
+
+
+
+/* ======== SIDEBAR ======== */
+
+.sidebar {
+    width: 260px;
+    background: #00272b; /* donkerblauw */
+    display: flex;
+    flex-direction: column;
+    padding: 25px;
+    color: white;
+    box-shadow: 4px 0 12px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+    font-size: 27px;
+    font-weight: bold;
+    margin-bottom: 40px;
+    color: #ffffff;
+}
+
+.side-link {
+    padding: 12px 15px;
+    color: #b9c4e0;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    font-size: 15px;
+    transition: 0.25s;
+}
+
+.side-link:hover {
+    background: #1c2b54;
+    color: #fff;
+}
+
+.side-link.active {
+    background: #1f2f5f;
+    color: #ffffff;
+}
+
+.side-section-title {
+    font-size: 13px;
+    margin: 25px 0 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+    opacity: 0.6;
+}
+
+.logout {
+    color: #ffffff;
+}
+
+.logout:hover {
+    background: #3a1920;
+    color: #ffb3b3;
+}
+
+
+
+/* ======== MAIN ======== */
+
+.main {
+    flex: 1;
+    padding: 35px 45px;
+    overflow-y: auto;
+}
+
+.header h1 {
+    font-size: 28px;
+    color:00272b;
+}
+
+.subtitle {
+    font-size: 15px;
+    opacity: 0.7;
+    margin-top: 4px;
+}
+
+
+
+/* ======== STATS CARDS ======== */
+
+.stats-row {
+    margin-top: 30px;
+    display: flex;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+.stat-card {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 14px;
+    width: 260px;
+    box-shadow: 0 5px 18px rgba(0,0,0,0.06);
+    transition: transform 0.2s;
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+}
+
+.stat-number {
+    font-size: 32px;
+    font-weight: bold;
+    margin-top: 8px;
+}
+
+.stat-label {
+    font-size: 13px;
+    opacity: 0.6;
+}
+
+
+
+/* ======== PRODUCT GRID ======== */
+
+.section-title {
+    margin-top: 40px;
+    margin-bottom: 15px;
+    font-size: 22px;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 25px;
+}
+
+.product-card {
+    background: #ffffff;
+    border-radius: 14px;
+    box-shadow: 0 5px 18px rgba(0,0,0,0.06);
+    padding: 18px;
+    text-align: center;
+    transition: 0.25s;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+}
+
+.product-img {
+    width: 100%;
+    height: 160px;
+    border-radius: 12px;
+    object-fit: cover;
+    margin-bottom: 12px;
+}
+
+.product-desc {
+    font-size: 14px;
+    opacity: 0.7;
+    margin: 10px 0;
+}
+
+
+
+/* ======== ACTION BUTTONS ======== */
+
+.product-actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.btn-small {
+    padding: 7px 13px;
+    font-size: 13px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.edit-btn {
+    background: #e4ebff;
+    color: #1d2f5d;
+}
+
+.edit-btn:hover {
+    background: #d1dbff;
+}
+
+.delete-btn {
+    background: #ffe4e4;
+    color: #8c1f1f;
+}
+
+.delete-btn:hover {
+    background: #ffcece;
+}
+
+
+
+/* ======== ADD NEW PRODUCT CARD ======== */
+
+.add-card {
+    background: #dfe6ff;
+    color: #243763;
+    font-weight: bold;
+    font-size: 17px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.add-card:hover {
+    background: #c6d4ff;
+}
+
+/* ==================== NOTIFICATIES ==================== */
+
+.notification-link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.notification-badge {
+    background: #7fff00;
+    color: #00272b;
+    font-size: 12px;
+    font-weight: bold;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 8px;
+    right: 15px;
+}
+
+.notification-dropdown {
+    position: absolute;
+    top: 140px;               /* past bij jouw sidebar */
+    left: 270px;
+    width: 320px;
+    background: #001f24;
+    border-radius: 14px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    padding: 15px;
+    display: none;            /* standaard verborgen */
+    z-index: 1000;
+    color: white;
+}
+
+.notification-dropdown h4 {
+    margin: 0 0 15px 0;
+    color: #7fff00;
+    font-size: 16px;
+    border-bottom: 1px solid rgba(127,255,0,0.2);
+    padding-bottom: 8px;
+}
+
+.notification-item {
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    font-size: 14px;
+}
+
+.notification-item:last-child {
+    border-bottom: none;
+}
+
+.notification-item small {
+    color: #a0d8d8;
+}
+
+.time {
+    display: block;
+    font-size: 12px;
+    color: #7fff00;
+    margin-top: 4px;
+}
+
+.view-all {
+    display: block;
+    text-align: center;
+    margin-top: 12px;
+    color: #7fff00;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.view-all:hover {
+    text-decoration: underline;
+}
+
+/* Maak dropdown zichtbaar als hij open is */
+.notification-dropdown.show {
+    display: block;
+}
+.sub-warning-banner {
+    background: #f8d7da;
+    color: #721c24;
+    padding: 15px 25px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+
+.sub-warning-banner a {
+    color: #721c24;
+    text-decoration: underline;
+}
+
+.sub-reminder-banner {
+    background: #fff3cd;
+    color: #856404;
+    padding: 15px 25px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+
+.sub-reminder-banner a {
+    color: #856404;
+    text-decoration: underline;
+}

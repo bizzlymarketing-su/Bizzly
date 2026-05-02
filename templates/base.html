@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Bizzly{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<!-- ===== GLOBAL NAVBAR VOOR ALLE PAGINA’S ===== -->
+<nav class="top-nav">
+    <div class="nav-left">
+        <a href="{{ url_for('home') }}" class="logo-text">BIZZLY</a>
+    </div>
+
+    <!-- Hamburger knop (alleen zichtbaar op mobiel) -->
+    <button class="hamburger" onclick="toggleNav()" id="hamburger">☰</button>
+
+    <!-- Nav links (verstopt op mobiel totdat hamburger geklikt wordt) -->
+    <div class="nav-links" id="nav-links">
+        <a href="{{ url_for('home') }}" class="nav-item">HOME</a>
+
+        <div class="dropdown">
+            <button class="dropbtn">CATEGORIEËN ▼</button>
+            <div class="dropdown-content">
+                <a href="/category/restaurant">Restaurants</a>
+                <a href="/category/winkel">Winkels</a>
+                <a href="/category/bakery">Bakery</a>
+                <a href="/category/beauty">Beauty</a>
+                <a href="/category/kapper">Kapper</a>
+            </div>
+        </div>
+
+        {% if session.get('role') == 'entrepreneur' %}
+            <a href="{{ url_for('dashboard') }}" class="nav-item">Dashboard</a>
+            <a href="{{ url_for('logout') }}" class="nav-item">Log uit</a>
+        {% elif session.get('role') == 'customer' %}
+            <a href="{{ url_for('wishlist') }}" class="nav-item">Wishlist</a>
+            <a href="{{ url_for('logout') }}" class="nav-item">Log uit</a>
+        {% else %}
+            <a href="{{ url_for('signup_customer') }}" class="nav-item">Signup klant</a>
+            <a href="{{ url_for('signup') }}" class="nav-item">Signup ondernemer</a>
+            <a href="{{ url_for('login') }}" class="nav-item">Log in</a>
+        {% endif %}
+
+        <form method="GET" action="{{ url_for('home') }}" class="nav-search">
+            <input type="text" name="q" placeholder="Zoeken...">
+            <button type="submit">🔍</button>
+        </form>
+    </div>
+</nav>
+
+<script>
+function toggleNav() {
+    const links = document.getElementById('nav-links');
+    const burger = document.getElementById('hamburger');
+    links.classList.toggle('open');
+    burger.textContent = links.classList.contains('open') ? '✕' : '☰';
+}
+</script>
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="flash-messages">
+      {% for category, message in messages %}
+        <div class="flash {{ category }}">{{ message }}</div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+<!-- ===== CONTENT VAN DE PAGINA ===== -->
+<div class="page-container">
+{% block content %}{% endblock %}
+</div>
+
+<footer class="main-footer">
+    <div class="footer-content">
+
+        <!-- Linkerkant: Logo + korte tekst -->
+        <div class="footer-left">
+            <h2 class="footer-logo">BIZZLY</h2>
+            <a href="{{ url_for('about') }}" class="footer-logo">OVER ONS</a>
+            <p>Ontdek lokale bedrijven in Suriname</p>
+
+        </div>
+
+        <!-- Midden: Contact info -->
+        <div class="footer-center">
+            <h3>Contact</h3>
+            <p><strong>Telefoon:</strong> +597 763 2289</p>
+            <p><strong>Email:</strong> BizzlyMarketing@gmail.com</p>
+        </div>
+
+        <!-- Rechterkant: Social media + snelle links -->
+        <div class="footer-right">
+            <h3>Volg ons</h3>
+            <div class="social-links">
+                <a href="#" target="_blank">Facebook</a>
+                <a href="#" target="_blank">Instagram</a>
+                <a href="#" target="_blank">WhatsApp</a>
+            </div>
+
+            <p class="footer-note">© 2026 Bizzly Suriname - Alle rechten voorbehouden</p>
+        </div>
+
+    </div>
+</footer>
+
+</body>
+
+</html>
+

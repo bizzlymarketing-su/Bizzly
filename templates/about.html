@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Bizzly</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Chart.js voor de grafiek (super simpel) -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <style>
+        /* Extra CSS speciaal voor About Us komt hier straks */
+    </style>
+</head>
+<body>
+
+<!-- HERO BOVENKANT (het bos met grote tekst) -->
+<div class="about-hero">
+    <div class="hero-overlay">
+        <p class="benefit">Benefit from our solutions.</p>
+        <h1>GROW YOUR COMPANY</h1>
+        <h2>with Bizzly</h2>
+        <p class="marketing">Bizzly Marketing</p>
+    </div>
+</div>
+
+<!-- REST VAN DE PAGINA -->
+<div class="about-container">
+
+    <!-- Partner section -->
+    <div class="partner-section">
+        <div class="left-arrows">
+            <div class="arrow">➤</div>
+            <div class="arrow">➤</div>
+            <div class="arrow">➤</div>
+        </div>
+        <div class="partner-text">
+            <h2>We partner with you to drive business growth.</h2>
+            <p>Bizzly is een platform dat lokale bedrijven en klanten met elkaar verbindt. Ontdek eenvoudig producten en diensten, en geef jouw business de zichtbaarheid die het verdient.</p>
+        </div>
+    </div>
+
+    <!-- Our service -->
+    <div class="service-section">
+        <h2 class="section-title">Our service</h2>
+        <div class="service-box">
+            <h3>Website</h3>
+            <p>Bij Bizzly richten wij ons op het vereenvoudigen van de manier waarop klanten lokale bedrijven ontdekken en benaderen.<br><br>
+            Ons platform biedt gebruikers een centraal overzicht van diverse ondernemingen binnen Suriname, waardoor het zoeken naar producten en diensten efficiënter en overzichtelijker wordt. In plaats van afhankelijk te zijn van sociale media of mond-tot-mondreclame, kunnen klanten via Bizzly gericht zoeken en direct relevante bedrijven vinden.</p>
+        </div>
+    </div>
+
+    <!-- Onze visie + grafiek + missie -->
+    <div class="vision-mission-grid">
+
+        <div class="vision">
+            <h2 class="section-title">Onze visie</h2>
+            <p>Wij streven ernaar om de kracht van marketing en advertenties te benutten om merken op een authentieke en impactvolle manier met hun doelgroep te verbinden. Onze ambitie is om met technologische vooruitgang en sterke klantrelaties een toekomst te creëren waarin alle kleine ondernemers toegang hebben tot transparante en betrouwbare advertentiestrategieën.</p>
+        </div>
+
+        <!-- Grafiek -->
+        <div class="chart-container">
+            <canvas id="growthChart"></canvas>
+        </div>
+
+        <div class="mission">
+            <h2 class="section-title">Onze missie</h2>
+            <p>Wij helpen kleine en startende ondernemers om hun merk zichtbaar te maken door effectieve marketing en promotiestrategieën. Door klanten de mogelijkheid te geven om Exploratief te plaatsen, versterken we de geloofwaardigheid en groei van bedrijven. Ons doel is om toegankelijke en resultaatgerichte marketingoplossingen te bieden, zodat elk bedrijf ( groot of klein ) de kans krijgt om succesvol te zijn.</p>
+        </div>
+    </div>
+
+    <!-- Bottom call-to-action -->
+    <div class="bottom-cta">
+        <h2>Let's bring your company to the next level.</h2>
+        <div class="heart">❤️</div>
+        <h2 class="get-in-touch">Get in touch!</h2>
+        <div class="contact-info">
+            <p><strong>Phone</strong><br>(597) 8379745</p>
+            <p><strong>Email</strong><br>BizzlyMarketing.com</p>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // Grafiek maken (exact zoals in je Canva)
+    const ctx = document.getElementById('growthChart');
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['2021', '2022', '2023', '2024', '2025'],
+            datasets: [{
+                label: 'Groei',
+                data: [8, 18, 20, 34, 37],
+                borderColor: '#7fff00',
+                borderWidth: 5,
+                tension: 0.4,
+                pointBackgroundColor: '#7fff00',
+                pointRadius: 6
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: { legend: { display: false } },
+            scales: {
+                y: { min: 0, max: 40, grid: { color: 'rgba(255,255,255,0.1)' } },
+                x: { grid: { color: 'rgba(255,255,255,0.1)' } }
+            }
+        }
+    });
+</script>
+
+</body>
+</html>

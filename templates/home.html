@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bizzly</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<nav class="top-nav">
+    <div class="nav-left">
+        <a class="logo-text" href="{{ url_for('home') }}">BIZZLY</a>
+
+        <a href="{{ url_for('home') }}" class="nav-item">HOME</a>
+        {% if session.get('role') == 'entrepreneur' %}
+            <a href="{{ url_for('dashboard') }}" class="nav-item">Dashboard</a>
+            <a href="{{ url_for('logout') }}" class="nav-item">Log uit</a>
+
+        {% elif session.get('role') == 'customer' %}
+            <a href="{{ url_for('wishlist') }}" class="nav-item">Wishlist</a>
+            <a href="{{ url_for('logout') }}" class="nav-item">Log uit</a>
+
+        {% else %}
+            <a href="{{ url_for('signup_customer') }}" class="nav-item">Sign-up Klant</a>
+            <a href="{{ url_for('signup') }}" class="nav-item">Sign-up Ondernemer</a>
+            <a href="{{ url_for('login') }}" class="nav-item">Log in</a>
+        {% endif %}
+
+        <!-- Dropdown: Categorieën -->
+        <div class="dropdown">
+            <button class="dropbtn">CATEGORIEËN ▼</button>
+            <div class="dropdown-content">
+                <a href="/category/restaurant">Restaurants</a>
+                <a href="/category/winkel">Winkels</a>
+                <a href="/category/bakery">Bakery</a>
+                <a href="/category/kapper">Kappers</a>
+                <a href="/category/beauty">Beauty</a>
+                <a href="/category/cleaning">Cleaning</a>
+                <a href="/category/car_services">Car Services</a>
+                <a href="/category/electronics">Electronics</a>
+                <a href="/category/fashion">Fashion</a>
+                <a href="/category/food_drinks">Food & Drinks</a>
+                <a href="/category/dienstverlening">Dienstverlening</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="nav-right">
+        <form method="GET" action="{{ url_for('home') }}" class="nav-search">
+            <input type="text" name="q" placeholder="Zoeken..." value="{{ request.args.get('q', '') }}">
+            <button type="submit">🔍</button>
+        </form>
+
+
+    </div>
+</nav>
+
+
+    <header>
+        <img src="{{ url_for('static', filename='images/bizz1.png') }}" alt="Bizzly Logo" class="logo">
+        <h1>Ontdek lokale bedrijven in Suriname met Bizzly</h1>
+    </header>
+
+    <div class="business-grid" id="business-grid">
+    {% for b in businesses %}
+    <div class="business-card" style="display: none;">
+        <img src="{{ url_for('static', filename=b.image) }}" alt="{{ b.name }}">
+        <h2>{{ b.name }}</h2>
+        <a href="/business/{{ b.id }}"><button>Bekijk info</button></a>
+    </div>
+    {% endfor %}
+</div>
+
+<div class="load-more-wrapper">
+    <button class="load-more-btn" id="load-more-btn" onclick="loadMore()">Laad meer ↓</button>
+</div>
+
+<script>
+    const cards = document.querySelectorAll('.business-card');
+    let visible = 0;  // hoeveel zijn er nu zichtbaar
+
+    function loadMore() {
+        // Toon de volgende 9 kaarten
+        let count = 0;
+        for (let i = visible; i < cards.length; i++) {
+            if (count < 9) {
+                cards[i].style.display = 'block';
+                count++;
+            }
+        }
+        visible += count;
+
+        // Verberg de knop als alles zichtbaar is
+        if (visible >= cards.length) {
+            document.getElementById('load-more-btn').style.display = 'none';
+        }
+    }
+
+    // Laad de eerste 9 meteen bij het openen van de pagina
+    loadMore();
+</script>
+<script>
+function toggleMenu() {
+    const menu = document.getElementById("menu");
+    if (menu.style.display === "flex") {
+        menu.style.display = "none";
+    } else {
+        menu.style.display = "flex";
+    }
+}
+</script>
+<footer class="main-footer">
+    <div class="footer-content">
+
+        <!-- Linkerkant: Logo + korte tekst -->
+        <div class="footer-left">
+            <h2 class="footer-logo">BIZZLY</h2>
+            <a href="{{ url_for('about') }}" class="footer-logo">About us</a>
+            <p>Ontdek lokale bedrijven in Suriname</p>
+        </div>
+
+        <!-- Midden: Contact info -->
+        <div class="footer-center">
+            <h3>Contact</h3>
+            <p><strong>Telefoon:</strong> +597 763 2289</p>
+            <p><strong>Email:</strong> BizzlyMarketing@gmail.com </p>
+        </div>
+
+        <!-- Rechterkant: Social media + snelle links -->
+        <div class="footer-right">
+            <h3>Volg ons</h3>
+            <div class="social-links">
+                <a href="#" target="_blank">Facebook</a>
+                <a href="#" target="_blank">Instagram</a>
+                <a href="#" target="_blank">WhatsApp</a>
+            </div>
+
+            <p class="footer-note">© 2026 Bizzly Suriname - Alle rechten voorbehouden</p>
+        </div>
+
+    </div>
+</footer>
+</body>
+</html>

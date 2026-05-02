@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aanmelden - Klant</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="flash-messages">
+      {% for category, message in messages %}
+        <div class="flash {{ category }}">{{ message }}</div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+    <div class="signup-container">
+        <h1>Maak een klantaccount</h1>
+        <p>Ontdek bedrijven, voeg producten toe aan je wishlist en laat reviews achter.</p>
+
+        <form action="/signup_customer" method="POST" class="signup-form">
+            <label for="name">Naam</label>
+            <input type="text" id="name" name="name" placeholder="Je naam" required>
+
+            <label for="email">Gmail</label>
+            <input type="email" id="email" name="email" placeholder="bijv. jouwnaam@gmail.com" required>
+
+            <label for="password">Wachtwoord</label>
+            <input type="password" id="password" name="password" placeholder="Kies een sterk wachtwoord" required>
+
+            <button type="submit" class="btn">Account aanmaken</button>
+        </form>
+
+        <p>Heb je al een account? <a href="{{ url_for('login') }}">Log in</a></p>
+    </div>
+
+</body>
+</html>
