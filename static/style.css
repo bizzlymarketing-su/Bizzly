@@ -1554,3 +1554,18 @@ body {
         align-items: center;
     }
 }
+@media (max-width: 768px) {
+    .business-description-box {
+        width: 100%;
+        box-sizing: border-box;
+        border-radius: 12px;
+        padding: 20px;
+        margin: 15px 0;
+    }
+
+    .address-box {
+        width: 100%;
+        box-sizing: border-box;
+        display: block;
+    }
+}
