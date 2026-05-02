@@ -3,3 +3,4 @@ gunicorn
 python-dotenv
 flask_sqlalchemy
 flask_migrate
+flask_limiter
