@@ -1443,3 +1443,114 @@ body {
     background: #7fff00;
     color: #00272b;
 }
+/* ===== MOBIEL ALGEMEEN ===== */
+@media (max-width: 768px) {
+
+    /* Navbar box-sizing fix */
+    .top-nav {
+        box-sizing: border-box;
+        padding: 12px 15px;
+    }
+
+    /* Hero header kleiner op mobiel */
+    header {
+        padding: 20px 15px;
+    }
+
+    header h1 {
+        font-size: 20px;
+        margin: 0;
+    }
+
+    /* Business grid: 1 kolom op mobiel */
+    .business-grid {
+        grid-template-columns: 1fr;
+        padding: 15px;
+        gap: 15px;
+    }
+
+    /* Business card afbeelding fix */
+    .business-card img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+    }
+
+    /* Footer: alles gecentreerd onder elkaar */
+    .footer-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 25px;
+    }
+
+    .footer-right {
+        text-align: center;
+    }
+
+    .social-links {
+        align-items: center;
+    }
+
+    /* Coupon pagina padding fix */
+    .coupon-wrapper {
+        margin: 80px 20px;
+        padding: 30px 20px;
+    }
+
+    /* Setup en add-product pagina */
+    .setup-wrapper,
+    .add-product-wrapper {
+        margin: 80px 15px;
+        border-radius: 15px;
+    }
+
+    .setup-content,
+    .add-product-content {
+        padding: 25px 20px;
+    }
+
+    /* Auth en signup pagina */
+    .auth-container,
+    .signup-container {
+        margin: 80px 20px;
+        padding: 25px 20px;
+    }
+
+    /* Product pagina */
+    .product-page {
+        grid-template-columns: 1fr;
+        margin: 80px 15px;
+        padding: 0 15px;
+        gap: 30px;
+    }
+
+    .product-title {
+        font-size: 36px;
+        margin-bottom: 30px;
+    }
+
+    /* About pagina */
+    .about-container {
+        padding: 40px 20px;
+    }
+
+    .bottom-cta h2 {
+        font-size: 1.8rem;
+    }
+
+    .contact-info {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    /* Wishlist pagina */
+    .wishlist-container {
+        margin: 80px 15px;
+    }
+
+    .wishlist-item {
+        flex-direction: column;
+        align-items: center;
+    }
+}
