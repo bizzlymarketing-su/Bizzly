@@ -1056,8 +1056,6 @@ body {
     padding: 25px;
     margin: 25px 0;
     border: 1px solid rgba(127, 255, 0, 0.2);     /* lichte groene rand */
-    width: 100%;           /* ← toevoegen */
-    box-sizing: border-box;
 }
 
 .section-title {
@@ -1566,12 +1564,8 @@ body {
     }
 
     .address-box {
-    background-color: rgba(255, 255, 255, 0.08);
-    border-radius: 12px;
-    padding: 18px 22px;
-    margin: 20px 0;
-    display: block;   /* ← van inline-block naar block */
-    width: 100%;
-    box-sizing: border-box;
+        width: 100%;
+        box-sizing: border-box;
+        display: block;
     }
 }
