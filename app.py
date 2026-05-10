@@ -1,3 +1,5 @@
+from sqlalchemy import create_engine
+from sqlalchemy.pool import NullPool
 from supabase import create_client, Client
 from dotenv import load_dotenv
 load_dotenv()
@@ -19,11 +21,13 @@ DB_available = True
 app = Flask(__name__)
 
 # verbind met SQLite database
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///bizzly.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = os.environ.get('SECRET_KEY')
 db.init_app(app)
 migrate = Migrate(app, db)
+
+
 
 supabase: Client = create_client(
     os.environ.get("SUPABASE_URL"),
