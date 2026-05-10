@@ -1,6 +1,5 @@
 from sqlalchemy import create_engine
 from sqlalchemy.pool import NullPool
-from supabase import create_client, Client
 from dotenv import load_dotenv
 load_dotenv()
 
