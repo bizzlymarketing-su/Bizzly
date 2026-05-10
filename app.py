@@ -1,3 +1,4 @@
+from supabase import create_client, Client
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -23,6 +24,11 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = os.environ.get('SECRET_KEY')
 db.init_app(app)
 migrate = Migrate(app, db)
+
+supabase: Client = create_client(
+    os.environ.get("SUPABASE_URL"),
+    os.environ.get("SUPABASE_KEY")
+)
 
 limiter = Limiter(
     get_remote_address,
