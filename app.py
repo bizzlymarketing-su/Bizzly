@@ -27,12 +27,6 @@ db.init_app(app)
 migrate = Migrate(app, db)
 
 
-
-supabase: Client = create_client(
-    os.environ.get("SUPABASE_URL"),
-    os.environ.get("SUPABASE_KEY")
-)
-
 limiter = Limiter(
     get_remote_address,
     app=app,
