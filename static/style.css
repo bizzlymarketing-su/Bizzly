@@ -138,11 +138,7 @@ button:hover {
     display: block;
 }
 
-.info-section {
-    background-color: #00272b;
-    overflow-y: auto;
-    box-sizing: border-box;
-}
+
 
 /* ---- MOBIEL: map boven, info onder ---- */
 @media (max-width: 768px) {
