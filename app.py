@@ -675,6 +675,25 @@ def create_coupon(code):
     db.session.commit()
     return f"✅ Coupon '{code.upper()}' aangemaakt!"
 
+@app.route('/admin/generate_coupon')
+def generate_coupon():
+    admin_key = request.args.get('key', '')
+    if admin_key != os.environ.get('ADMIN_KEY'):
+        return "Geen toegang", 403
+
+    # Genereer een willekeurige code
+    random_code = "BIZZLY-" + uuid.uuid4().hex[:8].upper()
+
+    # Sla op in database
+    existing = Coupon.query.filter_by(code=random_code).first()
+    if existing:
+        return "Probeer opnieuw, code bestond al!"
+
+    coupon = Coupon(code=random_code)
+    db.session.add(coupon)
+    db.session.commit()
+    return f"✅ Coupon aangemaakt: {random_code}"
+
 
 if __name__ == "__main__":
     app.run(debug=False)
