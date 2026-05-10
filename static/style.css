@@ -138,7 +138,14 @@ button:hover {
     display: block;
 }
 
-
+.info-section {
+    width: 60%;           /* was 50%, nu iets meer ruimte */
+    padding: 35px;
+    background-color: #00272b;
+    overflow-y: auto;
+    text-align: left;
+    box-sizing: border-box;
+}
 
 /* ---- MOBIEL: map boven, info onder ---- */
 @media (max-width: 768px) {
@@ -1567,4 +1574,31 @@ body {
     width: 100%;
     box-sizing: border-box;
     }
+}
+
+.social-media-links {
+    margin: 15px 0;
+}
+
+.fb-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #1877f2;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 15px;
+    transition: background 0.2s;
+}
+
+.fb-link:hover {
+    background: #1558b0;
+    color: white;
+}
+
+.fb-link i {
+    font-size: 20px;
 }

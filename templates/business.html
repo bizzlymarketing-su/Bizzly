@@ -32,6 +32,13 @@
         {% if business.address %}
         <div class="address-box" style="width:100%; box-sizing:border-box; display:block;">
             <p><span class="icon">📍</span> {{ business.address }}</p>
+            {% if business.facebook_url %}
+            <div class="social-media-links">
+                <a href="{{ business.facebook_url }}" target="_blank" rel="noopener" class="fb-link">
+                    <i class="fa-brands fa-facebook"></i> Facebook
+                </a>
+            </div>
+            {% endif %}
         </div>
         {% endif %}
 
@@ -75,13 +82,7 @@
         <button type="submit" class="review-btn">Plaatsen ★</button>
     </form>
 
-    {% if business.facebook_url %}
-    <a href="{{ business.facebook_url }}"
-       target="_blank" rel="noopener">
-        <img src="/static/images/facebook-icon.png"
-         alt="Facebook" width="32">
-    </a>
-    {% endif %}
+
 
     {% else %}
     <p class="review-login-msg"><a href="{{ url_for('login') }}">Log in als klant</a> om een review te plaatsen.</p>
