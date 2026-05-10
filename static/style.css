@@ -139,11 +139,8 @@ button:hover {
 }
 
 .info-section {
-    width: 60%;           /* was 50%, nu iets meer ruimte */
-    padding: 35px;
     background-color: #00272b;
     overflow-y: auto;
-    text-align: left;
     box-sizing: border-box;
 }
 
