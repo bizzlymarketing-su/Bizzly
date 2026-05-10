@@ -211,6 +211,7 @@ def setup_business():
     if request.method == 'POST':
         business.description = request.form['description']
         business.address = request.form.get('address', '')
+        business.accent_color = request.form.get('accent_color', '#7fff00')
 
         # logo upload (simpel)
         file = request.files.get('logo')
@@ -227,7 +228,6 @@ def setup_business():
             file.save(save_path)
             business.image = "images/" + filename  # alleen dit wordt opgeslagen in de database
             flash("✅ Bedrijfslogo succesvol geüpload!", "success")
-
         db.session.commit()
         if business.description:
             return redirect(url_for('dashboard'))

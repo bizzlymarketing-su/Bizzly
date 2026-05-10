@@ -12,6 +12,7 @@ class Entrepreneur(db.Model):
     category = db.Column(db.String(50), nullable=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(100), nullable=False)
+    accent_color = db.Column(db.String(7), default='#7fff00')
 
     businesses = db.relationship('Business', backref='owner', lazy=True)
 

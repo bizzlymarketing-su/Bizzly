@@ -1,7 +1,17 @@
 {% extends "base.html" %}
 {% block title %}{{ business.name }} - Bizzly{% endblock %}
 {% block content %}
+<style>
+    :root {
+        --accent: {{ business.accent_color or '#7fff00' }};
 
+    }
+
+    .info-section h1 { color: var(--accent); }
+    .bekijk-btn { background: var(--accent); }
+    .review-section h2 { color: var(--accent); }
+    .map-section iframe { border-color: var(--accent); }
+</style>
 <body>
 
 <div class="business-page">
