@@ -22,7 +22,7 @@
         <h1>{{ business.name }}</h1>
 
         <!-- === Mooie Bedrijfsbeschrijving === -->
-        <div class="business-description-box">
+        <div class="business-description-box" style="width:100%; box-sizing:border-box;">
             <h2 class="section-title">Over ons</h2>
             <p class="business-description">
                 {{ business.description }}
@@ -30,7 +30,7 @@
         </div>
 
         {% if business.address %}
-        <div class="address-box">
+        <div class="address-box" style="width:100%; box-sizing:border-box; display:block;">
             <p><span class="icon">📍</span> {{ business.address }}</p>
         </div>
         {% endif %}
