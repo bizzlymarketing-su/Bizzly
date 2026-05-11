@@ -259,11 +259,10 @@ def add_products(business_id):
         name = request.form['name']
         description = request.form['description']
         file = request.files.get('image')
+        file = request.files.get('image')
         if file and file.filename and allowed_file(file.filename):
             result = cloudinary.uploader.upload(file, folder="bizzly/products")
             image = result['secure_url']
-        else:
-            image = "images/default_product.png"
             flash("✅ Productfoto succesvol geüpload!", "success")
         else:
             image = "images/default_product.png"
