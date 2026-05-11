@@ -1051,56 +1051,45 @@ body {
 /* ==================== BUSINESS DESCRIPTION ==================== */
 
 .business-description-box {
-    background-color: rgba(255, 255, 255, 0.08);   /* doorschijnend wit */
+    background-color: rgba(255, 255, 255, 0.08);
     border-radius: 16px;
     padding: 25px;
     margin: 25px 0;
-    border: 1px solid rgba(127, 255, 0, 0.2);     /* lichte groene rand */
-}
-
-.section-title {
-    color: #7fff00;
-    font-size: 24px;
-    margin-bottom: 15px;
-    font-weight: 600;
+    border: 1px solid rgba(127, 255, 0, 0.2);
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .business-description {
     color: #ffffff;
     font-size: 17px;
-    line-height: 1.7;           /* maakt de tekst makkelijker leesbaar */
+    line-height: 1.75;
     margin: 0;
 }
 
-/* Adres box */
-.address-box {
-    background-color: rgba(255, 255, 255, 0.08);
-    border-radius: 12px;
-    padding: 18px 22px;
-    margin: 20px 0;
-    display: inline-block;
+/* ==================== MOBIEL ==================== */
+@media (max-width: 768px) {
+    .business-description-box {
+        padding: 20px;
+        margin: 20px 0;
+        border-radius: 14px;
+    }
+
+    .business-description {
+        font-size: 16px;
+        line-height: 1.8;
+    }
+
+    .info-section {
+        padding: 25px 20px;
+    }
+
+    .product-gallery {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 12px;
+    }
 }
 
-.address-box p {
-    margin: 0;
-    color: #ddd;
-    font-size: 16px;
-}
-
-.address-box .icon {
-    color: #7fff00;
-    margin-right: 8px;
-}
-
-/* Extra mooie touch voor de hele info-sectie */
-.info-section {
-    width: 60%;
-    padding: 35px;
-    background-color: #00272b;
-    overflow-y: auto;
-    text-align: left;
-    box-sizing: border-box;
-}
 
 /* ==================== MODERNE FOOTER ==================== */
 
