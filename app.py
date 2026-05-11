@@ -214,7 +214,8 @@ def setup_business():
     if request.method == 'POST':
         business.description = request.form['description']
         business.address = request.form.get('address', '')
-        business.accent_color = request.form.get('accent_color', '#7fff00')
+        user = Entrepreneur.query.get(session['entrepreneur_id'])
+        user.accent_color = request.form.get('accent_color', '#7fff00')
 
         # logo upload (simpel)
         file = request.files.get('logo')
