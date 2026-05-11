@@ -11,7 +11,7 @@
 <div class="business-grid" id="business-grid">
     {% for b in businesses %}
     <div class="business-card" style="display: none;">
-        <img src="{{ url_for('static', filename=b.image) }}" alt="{{ b.name }}">
+        <img src="{{ b.image }}" alt="{{ b.name }}">
         <h2>{{ b.name }}</h2>
         <a href="/business/{{ b.id }}"><button>Bekijk info</button></a>
     </div>

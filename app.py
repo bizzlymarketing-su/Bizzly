@@ -15,6 +15,9 @@ from werkzeug.utils import secure_filename
 from datetime import datetime, timedelta
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
+import cloudinary
+import cloudinary.uploader
+from cloudinary.utils import cloudinary_url
 
 DB_available = True
 app = Flask(__name__)
@@ -26,6 +29,11 @@ app.secret_key = os.environ.get('SECRET_KEY')
 db.init_app(app)
 migrate = Migrate(app, db)
 
+cloudinary.config(
+    cloud_name=os.environ.get('CLOUDINARY_CLOUD_NAME'),
+    api_key=os.environ.get('CLOUDINARY_API_KEY'),
+    api_secret=os.environ.get('CLOUDINARY_API_SECRET')
+)
 
 limiter = Limiter(
     get_remote_address,
@@ -220,17 +228,13 @@ def setup_business():
         # logo upload (simpel)
         file = request.files.get('logo')
 
+        file = request.files.get('logo')
         if file and file.filename:
             if not allowed_file(file.filename):
                 flash("Ongeldig bestandstype", "error")
-                return redirect(request.url)
-
-            # nieuw (correct)
-            ext = file.filename.rsplit('.', 1)[1].lower()
-            filename = f"{uuid.uuid4().hex}.{ext}"
-            save_path = os.path.join(UPLOAD_FOLDER, filename)  # volledige path om op te slaan
-            file.save(save_path)
-            business.image = "images/" + filename  # alleen dit wordt opgeslagen in de database
+                return redirect(url_for('setup_business'))
+            result = cloudinary.uploader.upload(file, folder="bizzly/businesses")
+            business.image = result['secure_url']  # alleen dit wordt opgeslagen in de database
             flash("✅ Bedrijfslogo succesvol geüpload!", "success")
         db.session.commit()
         if business.description:
@@ -255,12 +259,11 @@ def add_products(business_id):
         name = request.form['name']
         description = request.form['description']
         file = request.files.get('image')
-
         if file and file.filename and allowed_file(file.filename):
-            ext = file.filename.rsplit('.', 1)[1].lower()
-            filename = f"{uuid.uuid4().hex}.{ext}"
-            file.save(os.path.join(UPLOAD_FOLDER, filename))
-            image = "images/" + filename
+            result = cloudinary.uploader.upload(file, folder="bizzly/products")
+            image = result['secure_url']
+        else:
+            image = "images/default_product.png"
             flash("✅ Productfoto succesvol geüpload!", "success")
         else:
             image = "images/default_product.png"

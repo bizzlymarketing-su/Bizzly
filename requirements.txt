@@ -5,3 +5,4 @@ flask_sqlalchemy
 flask_migrate
 flask_limiter
 psycopg2-binary
+cloudinary

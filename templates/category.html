@@ -9,7 +9,7 @@
     {% for b in businesses %}
 
         <a class="business-card" href="/business/{{ b.id }}">
-            <img src="{{ url_for('static', filename=b.image) }}" alt="{{ b.name }}">
+            <img src="{{ b.image }}" alt="{{ b.name }}">
             <h2>{{ b.name }}</h2>
         </a>
     {% endfor %}
