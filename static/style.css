@@ -1602,3 +1602,104 @@ body {
 .fb-link i {
     font-size: 20px;
 }
+
+/* ===== PRODUCT PAGE - MODERN & SCHOON ===== */
+
+.product-page {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    max-width: 1200px;
+    margin: 100px auto;
+    padding: 0 40px;
+    align-items: center;
+}
+
+.product-image {
+    display: flex;
+    justify-content: center;
+}
+
+.image-wrapper {
+    width: 100%;
+    max-width: 480px;
+    background: #ffffff;
+    border-radius: 30px;
+    padding: 25px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    border: 12px solid #00272b;
+}
+
+.image-wrapper img {
+    width: 100%;
+    height: auto;
+    border-radius: 18px;
+    object-fit: cover;
+    display: block;
+}
+
+/* Typography */
+.product-info {
+    padding-top: 20px;
+}
+
+.product-title {
+    font-size: 52px;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    color: #00272b;
+}
+
+.product-heading {
+    font-size: 24px;
+    color: #7fff00;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.product-description {
+    font-size: 18px;
+    line-height: 1.7;
+    color: #333;
+    margin-bottom: 40px;
+}
+
+/* Wishlist knop */
+.wishlist-btn {
+    padding: 16px 32px;
+    background: #7fff00;
+    color: #00272b;
+    border: none;
+    border-radius: 50px;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.wishlist-btn:hover {
+    background: #00272b;
+    color: #7fff00;
+    transform: scale(1.05);
+}
+
+/* ==================== MOBIEL ==================== */
+@media (max-width: 900px) {
+    .product-page {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        margin: 60px 15px;
+    }
+
+    .product-title {
+        font-size: 38px;
+    }
+
+    .image-wrapper {
+        max-width: 100%;
+        padding: 15px;
+        border-width: 8px;
+    }
+}

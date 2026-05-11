@@ -19,16 +19,10 @@
             {{ product.description }}
         </p>
 
-        {% if product.subtitle %}
-        <div class="product-sub">
-            {{ product.subtitle }}
-        </div>
-        {% endif %}
-
         {% if session.get('role') == 'customer' %}
         <form method="POST" action="{{ url_for('add_wishlist', product_id=product.id) }}">
             <button type="submit" class="wishlist-btn">
-                ♡ Add to wishlist
+                ♡ Toevoegen aan wishlist
             </button>
         </form>
         {% endif %}
@@ -36,4 +30,3 @@
 
 </div>
 {% endblock %}
-
