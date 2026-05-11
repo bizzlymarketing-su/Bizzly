@@ -57,7 +57,7 @@
     {% for p in business.products %}
     <div class="product-card">
         <a href="{{ url_for('product_detail', product_id=p.id) }}">
-            <img src="{{ p.image) }}" alt="{{ p.name }}">
+            <img src="{{ p.image }}" alt="{{ p.name }}">
             <h4>{{ p.name }}</h4>
         </a>
 
