@@ -440,8 +440,7 @@ def dashboard():
         is_read=False
     ).order_by(Notification.timestamp.desc()).limit(5).all()
 
-    business.facebook_url = request.form.get('facebook_url', '').strip() or None
-    db.session.commit()
+
     products = Product.query.filter_by(business_id=business.id).all()
 
     total_products = len(products)
