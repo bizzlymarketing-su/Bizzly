@@ -697,6 +697,19 @@ def generate_coupon():
     db.session.commit()
     return f"✅ Coupon aangemaakt: {random_code}"
 
+@app.route('/update_facebook', methods=['POST'])
+def update_facebook():
+    if session.get('role') != 'entrepreneur':
+        return redirect(url_for('login'))
+
+    user = Entrepreneur.query.get(session['entrepreneur_id'])
+    business = Business.query.filter_by(owner_id=user.id).first()
+
+    business.facebook_url = request.form.get('facebook_url', '').strip() or None
+    db.session.commit()
+
+    flash("Facebook pagina opgeslagen!", "success")
+    return redirect(url_for('dashboard'))
 
 if __name__ == "__main__":
     app.run(debug=False)

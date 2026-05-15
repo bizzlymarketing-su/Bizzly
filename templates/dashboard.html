@@ -58,10 +58,14 @@
 
         <div class="side-section-title">ACCOUNT</div>
         <a href="{{ url_for('logout') }}" class="side-link logout">🚪 Uitloggen</a>
-        <label>Facebook pagina (optioneel)</label>
-        <input type="url" name="facebook_url"
-               placeholder="https://facebook.com/jouwbedrijf"
-               value="{{ business.facebook_url or '' }}">
+        <!-- nieuw -->
+        <form method="POST" action="{{ url_for('update_facebook') }}">
+            <label>Facebook pagina (optioneel)</label>
+            <input type="url" name="facebook_url"
+                   placeholder="https://facebook.com/jouwbedrijf"
+                   value="{{ business.facebook_url or '' }}">
+            <button type="submit" class="fb-save-btn">Opslaan</button>
+        </form>
     </aside>
 
 

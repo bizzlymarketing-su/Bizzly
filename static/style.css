@@ -1692,3 +1692,19 @@ body {
         border-width: 8px;
     }
 }
+
+.fb-save-btn {
+    margin-top: 8px;
+    width: 100%;
+    padding: 8px;
+    background: #1877f2;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.fb-save-btn:hover {
+    background: #1558b0;
+}
