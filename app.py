@@ -286,6 +286,8 @@ def add_products(business_id):
 @app.route('/edit_product/<int:product_id>', methods=['GET', 'POST'])
 def edit_product(product_id):
     if session.get('role') != 'entrepreneur':
+        flash('Log in om producten te beheren.', 'error')
+        return redirect(url_for('login'))
 
     product = Product.query.get_or_404(product_id)
     business = Business.query.get(product.business_id)
