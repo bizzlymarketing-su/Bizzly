@@ -285,9 +285,7 @@ def add_products(business_id):
 
 @app.route('/edit_product/<int:product_id>', methods=['GET', 'POST'])
 def edit_product(product_id):
-    if 'user_id' not in session:
-        flash('Log in om producten te beheren.', 'error')
-        return redirect(url_for('login'))
+    if session.get('role') != 'entrepreneur':
 
     product = Product.query.get_or_404(product_id)
     business = Business.query.get(product.business_id)
@@ -304,7 +302,7 @@ def edit_product(product_id):
 
 @app.route('/delete_product/<int:product_id>', methods=['POST'])
 def delete_product(product_id):
-    if 'user_id' not in session:
+    if session.get('role') != 'entrepreneur':
         flash('Log in om producten te beheren.', 'error')
         return redirect(url_for('login'))
 
